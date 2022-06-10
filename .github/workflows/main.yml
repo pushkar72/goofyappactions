@@ -1,0 +1,26 @@
+name: Azure App Deploy
+
+on:[push,pull]
+
+env:
+  azure-app-name: goofyapp400
+  app-package-path: './published'
+  dotnet-version: 3.1.103
+
+jobs:
+  build:
+    name: Azure App Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@main
+      - name: Setup Dotnet
+        uses: actions/setup-dotnet@v1.4.0
+        with:
+          dotnet-version: ${{ env.dotnet-version }}
+      - name: Restore & Build-Publish
+        run:
+          - dotnet restore
+          - dotnet build -c Release
+          - dotnet publish -c Release -o ./published
+      
+
