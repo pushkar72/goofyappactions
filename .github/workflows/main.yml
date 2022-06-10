@@ -1,6 +1,6 @@
 name: Azure App Deploy
 
-on:[push]
+on: [push]
 
 env:
   azure-app-name: goofyapp400
