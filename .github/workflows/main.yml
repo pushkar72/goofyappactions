@@ -15,10 +15,7 @@ jobs:
           dotnet-version: 3.1.103
     # dotnet build & Publish
       - name: Dotnet Build & Publish
-        run: |
-          dotnet restore
-          dotnet build
-          dotnet publish -c Release -o ./published --no-build
+        run: dotnet publish -c Release -o ./published
         
     # deploy to azure app
     # download artifact in github
