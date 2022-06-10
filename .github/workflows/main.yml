@@ -2,6 +2,10 @@ name: Azure Web App Deploy
 
 on: [push]
 
+env:
+  azureapp-name: githubgoofyapp
+  publish-path: './published'
+  
 jobs:
   build:
     name: Dotnet Build
@@ -15,7 +19,13 @@ jobs:
           dotnet-version: 3.1.103
     # dotnet build & Publish
       - name: Dotnet Build & Publish
-        run: dotnet publish -c Release -o ./published
+        run: dotnet publish -c Release -o ${{ env.publish-path }}
         
     # deploy to azure app
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with:
+          app-name: ${{ env.azureapp-name }}
+          publish-profile: ${{ secrets.AZUREAPPPROFILE }}
+          package: ${{ env.publish-path }}
     # download artifact in github
