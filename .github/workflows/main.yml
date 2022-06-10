@@ -30,7 +30,7 @@ jobs:
           package: ${{ env.publish-path }}
     # download artifact in github
       - name: Download Artifact
-        uses: actions/download-artifact@v3.0.0
+        uses: actions/upload-artifact@v3.1.0
         with:
           name: webapppackage
           path: ${{ env.publish-path }}
