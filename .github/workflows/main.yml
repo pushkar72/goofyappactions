@@ -1,0 +1,24 @@
+name: Azure Web App Deploy
+
+on: [push]
+
+jobs:
+  build:
+    name: Dotnet Build
+    runs-on: ubuntu-latest
+    steps:
+    # setup dotnet version
+      - uses: actions/checkout@main
+      - name: Setup Dotnet Env
+        uses: actions/setup-dotnet@v2.1.0
+        with:
+          dotnet-version: 3.1.103
+    # dotnet build & Publish
+      - name: Dotnet Build & Publish
+        run: |
+          dotnet restore
+          dotnet build
+          dotnet publish -c Release -o ./published --no-build
+        
+    # deploy to azure app
+    # download artifact in github
