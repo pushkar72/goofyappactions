@@ -18,9 +18,6 @@ jobs:
         with:
           dotnet-version: ${{ env.dotnet-version }}
       - name: Restore & Build-Publish
-        run:
-          - dotnet restore
-          - dotnet build -c Release
-          - dotnet publish -c Release -o ./published
+        run: dotnet publish -c Release -o ./published
       
 
