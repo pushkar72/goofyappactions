@@ -19,5 +19,12 @@ jobs:
           dotnet-version: 3.1.103
       - name: Restore & Build-Publish
         run: dotnet publish -c Release -o ./published
+      - name: Azure WebApp
+        uses: Azure/webapps-deploy@v2
+        with: 
+          app-name: ${{env.azure-app-name }}
+          package: ${{ env.app-package-path }}
+        
+        
       
 
